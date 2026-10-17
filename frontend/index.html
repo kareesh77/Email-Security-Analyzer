@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Security Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Email Security Analyzer</h1>
+
+        <p>Analyze a suspicious email before clicking any links or sharing information.</p>
+
+        <form action="/analyze" method="POST">
+            <textarea
+                name="email"
+                placeholder="Paste the complete email here..."
+                required
+            ></textarea>
+
+            <button type="submit">Analyze Email</button>
+        </form>
+
+        <p class="notice">
+            Do not click links or open attachments from a suspicious email before analysis.
+        </p>
+    </div>
+
+</body>
+</html>

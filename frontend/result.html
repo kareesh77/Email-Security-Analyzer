@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Security Report</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Email Security Report</h1>
+
+        {% if result is string %}
+
+            <div class="result">
+                <p>{{ result }}</p>
+            </div>
+
+        {% else %}
+
+            <div class="risk-card {{ result.verdict|lower }}">
+
+                <h2>{{ result.verdict }}</h2>
+
+                <div class="score">
+                    {{ result.score }}/100
+                </div>
+
+                <div class="email-details">
+                    <p>
+                        <strong>Sender:</strong>
+                        {{ result.sender if result.sender else "Not provided" }}
+                    </p>
+
+                    <p>
+                        <strong>Subject:</strong>
+                        {{ result.subject if result.subject else "Not provided" }}
+                    </p>
+                </div>
+
+                <h3>Security Analysis</h3>
+
+                {% if result.reasons %}
+
+                    <ul>
+                        {% for reason in result.reasons %}
+                            <li>{{ reason }}</li>
+                        {% endfor %}
+                    </ul>
+
+                {% else %}
+
+                    <p>No suspicious indicators detected.</p>
+
+                {% endif %}
+
+            </div>
+
+            <div class="analysis-summary">
+                <p>
+                    The result is based on the email content, sender information,
+                    Reply-To information, and links detected in the email.
+                </p>
+            </div>
+
+        {% endif %}
+
+        <a href="/">Analyze Another Email</a>
+    </div>
+
+</body>
+</html>
