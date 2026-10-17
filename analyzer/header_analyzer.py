@@ -66,6 +66,23 @@ def analyze_headers(headers):
                 )
                 break
 
+        brand_patterns = [
+            (r"paypa[l1]", "paypal"),
+            (r"micros[o0]ft", "microsoft"),
+            (r"g[o0][o0]gle", "google"),
+            (r"app[l1]e", "apple"),
+            (r"amaz[o0]n", "amazon"),
+            (r"faceb[o0][o0]k", "facebook")
+        ]
+
+        for pattern, brand in brand_patterns:
+            if re.search(pattern, sender_domain):
+                score += 20
+                reasons.append(
+                    "Sender domain may imitate a well-known brand"
+                )
+                break
+
     return {
         "score": min(score, 100),
         "reasons": list(dict.fromkeys(reasons))

@@ -2,14 +2,23 @@ def calculate_risk(phishing_result, url_result):
     phishing_score = phishing_result.get("score", 0)
     url_score = url_result.get("score", 0)
 
-    final_score = phishing_score + url_score
+    final_score = min(
+        round(
+            (phishing_score * 0.6) +
+            (url_score * 0.4)
+        ),
+        100
+    )
 
-    if final_score >= 70:
+    if final_score >= 60:
         verdict = "DANGEROUS"
-    elif final_score >= 40:
+        confidence = "HIGH"
+    elif final_score >= 30:
         verdict = "SUSPICIOUS"
+        confidence = "MEDIUM"
     else:
         verdict = "SAFE"
+        confidence = "LOW"
 
     reasons = []
 
@@ -21,8 +30,13 @@ def calculate_risk(phishing_result, url_result):
         url_result.get("reasons", [])
     )
 
+    unique_reasons = list(
+        dict.fromkeys(reasons)
+    )
+
     return {
-        "score": min(final_score, 100),
+        "score": final_score,
         "verdict": verdict,
-        "reasons": reasons
+        "confidence": confidence,
+        "reasons": unique_reasons
     }

@@ -9,6 +9,7 @@
 <body>
 
     <div class="container">
+
         <h1>Email Security Report</h1>
 
         {% if result is string %}
@@ -27,6 +28,18 @@
                     {{ result.score }}/100
                 </div>
 
+                <div class="confidence">
+                    <strong>Confidence:</strong>
+                    {{ result.confidence }}
+                </div>
+
+                <div class="risk-bar">
+                    <div
+                        class="risk-level {{ result.verdict|lower }}"
+                        style="width: {{ result.score }}%"
+                    ></div>
+                </div>
+
                 <div class="email-details">
                     <p>
                         <strong>Sender:</strong>
@@ -42,31 +55,45 @@
                 <h3>Security Analysis</h3>
 
                 {% if result.reasons %}
-
                     <ul>
                         {% for reason in result.reasons %}
                             <li>{{ reason }}</li>
                         {% endfor %}
                     </ul>
-
                 {% else %}
-
                     <p>No suspicious indicators detected.</p>
-
                 {% endif %}
 
-            </div>
+                <h3>Detected Links</h3>
 
-            <div class="analysis-summary">
-                <p>
-                    The result is based on the email content, sender information,
-                    Reply-To information, and links detected in the email.
-                </p>
+                {% if result.urls %}
+                    <ul>
+                        {% for url in result.urls %}
+                            <li>{{ url }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No links detected.</p>
+                {% endif %}
+
+                <h3>Detected Attachments</h3>
+
+                {% if result.attachments %}
+                    <ul>
+                        {% for attachment in result.attachments %}
+                            <li>{{ attachment }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No attachments detected.</p>
+                {% endif %}
+
             </div>
 
         {% endif %}
 
         <a href="/">Analyze Another Email</a>
+
     </div>
 
 </body>
