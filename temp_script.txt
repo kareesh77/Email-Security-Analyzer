@@ -1,0 +1,107 @@
+﻿<script>
+    const emailInput = document.getElementById("email");
+    const emailFile = document.getElementById("emailFile");
+    const uploadArea = document.getElementById("uploadArea");
+    const fileStatus = document.getElementById("fileStatus");
+    const fileName = document.getElementById("fileName");
+    const fileDetails = document.getElementById("fileDetails");
+    const removeFile = document.getElementById("removeFile");
+    const textStatus = document.getElementById("textStatus");
+    const textStatusDetails = document.getElementById("textStatusDetails");
+    const inputNotice = document.getElementById("inputNotice");
+    const analyzeButton = document.getElementById("analyzeButton");
+
+    function updateInputState() {
+        const hasText = emailInput.value.trim().length > 0;
+        const hasFile = emailFile.files.length > 0;
+
+        if (hasText || hasFile) {
+            analyzeButton.disabled = false;
+            inputNotice.classList.add("hidden");
+        } else {
+            analyzeButton.disabled = true;
+            inputNotice.classList.remove("hidden");
+        }
+
+        if (hasText) {
+            textStatus.classList.remove("hidden");
+
+            textStatusDetails.textContent =
+                emailInput.value.trim().length +
+                " characters ready for analysis.";
+        } else {
+            textStatus.classList.add("hidden");
+        }
+
+        if (hasFile) {
+            uploadArea.classList.add("file-selected");
+        } else {
+            uploadArea.classList.remove("file-selected");
+        }
+    }
+
+    emailInput.addEventListener("input", function () {
+        updateInputState();
+    });
+
+    emailFile.addEventListener("change", function () {
+
+        if (!emailFile.files.length) {
+            fileStatus.classList.add("hidden");
+            updateInputState();
+            return;
+        }
+
+        const file = emailFile.files[0];
+
+        const sizeInMB = file.size / (1024 * 1024);
+
+        const sizeText = sizeInMB < 1
+            ? Math.max(1, Math.round(file.size / 1024)) + " KB"
+            : sizeInMB.toFixed(2) + " MB";
+
+        fileName.textContent = file.name;
+
+        fileDetails.textContent =
+            sizeText + " | .eml file ready for analysis";
+
+        fileStatus.classList.remove("hidden");
+
+        updateInputState();
+    });
+
+    removeFile.addEventListener("click", function () {
+
+        emailFile.value = "";
+
+        fileStatus.classList.add("hidden");
+
+        updateInputState();
+    });
+
+    uploadArea.addEventListener("dragover", function (event) {
+        event.preventDefault();
+
+        uploadArea.classList.add("drag-active");
+    });
+
+    uploadArea.addEventListener("dragleave", function () {
+        uploadArea.classList.remove("drag-active");
+    });
+
+    uploadArea.addEventListener("drop", function (event) {
+
+        event.preventDefault();
+
+        uploadArea.classList.remove("drag-active");
+
+        const files = event.dataTransfer.files;
+
+        if (files.length) {
+            emailFile.files = files;
+            emailFile.dispatchEvent(new Event("change"));
+        }
+    });
+
+    updateInputState();
+</script>

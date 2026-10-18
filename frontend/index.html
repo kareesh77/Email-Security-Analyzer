@@ -1,51 +1,493 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Security Analyzer</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-    <div class="container">
-
-        <h1>Email Security Analyzer</h1>
-
-        <p>
-            Analyze a suspicious email before clicking any links
-            or sharing information.
-        </p>
-
-        <form action="/analyze" method="POST" enctype="multipart/form-data">
-
-            <textarea
-                name="email"
-                placeholder="Paste the complete email here..."
-            ></textarea>
-
-            <p>Or upload an email file:</p>
-
-            <input
-                type="file"
-                name="email_file"
-                accept=".eml,message/rfc822"
-            >
-
-            <button type="submit">
-                Analyze Email
-            </button>
-
-        </form>
-
-        <div class="notice">
-            <p>
-                Do not click links or open attachments from a suspicious
-                email before analysis.
-            </p>
+    <nav class="navbar">
+        <div class="brand">
+            <div class="brand-icon">E</div>
+            <div>
+                <div class="brand-name">Email Security Analyzer</div>
+                <div class="brand-subtitle">Threat Detection Platform</div>
+            </div>
         </div>
 
-    </div>
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            Analysis Engine Online
+        </div>
+    </nav>
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-badge">
+                <span>●</span>
+                EMAIL THREAT ANALYSIS
+            </div>
+
+            <h1>
+                Analyze suspicious emails<br>
+                <span>before they become a threat.</span>
+            </h1>
+
+            <p class="hero-text">
+                Analyze pasted email content or upload an email file
+                to detect phishing, spoofing, suspicious URLs and threats.
+            </p>
+
+        </section>
+
+        <section class="analyzer-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Choose Analysis Method</h2>
+                    <p>Select one of the two analysis options below.</p>
+                </div>
+
+                <div class="secure-badge">
+                    <span>[SECURE]</span>
+                    Secure Analysis
+                </div>
+            </div>
+
+            <div class="analysis-methods">
+
+                <section class="analysis-method">
+
+                    <div class="method-header">
+
+                        <div class="method-icon text-method-icon">
+                            <span></span>
+                        </div>
+
+                        <div>
+                            <h2>Analyze Email Text</h2>
+                            <p>
+                                Paste the complete email content,
+                                including headers and message body.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <form
+                        action="/analyze"
+                        method="POST"
+                        id="textForm"
+                    >
+
+                        <label for="email">
+                            Email Content
+                        </label>
+
+                        <textarea
+                            id="email"
+                            name="email"
+                            placeholder="Paste the complete email headers and message content here..."
+                        ></textarea>
+
+                        <div
+                            id="textStatus"
+                            class="input-status hidden"
+                        >
+                            <span class="status-check">OK</span>
+
+                            <div>
+                                <strong>
+                                    Email content ready
+                                </strong>
+
+                                <span id="textStatusDetails">
+                                    Ready for analysis.
+                                </span>
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="analyze-button"
+                            id="textAnalyzeButton"
+                            disabled
+                        >
+                            <span>Analyze Email Text</span>
+                            <span class="button-arrow">-&gt;</span>
+                        </button>
+
+                    </form>
+
+                </section>
+
+                <div class="method-divider">
+                    <span>OR</span>
+                </div>
+
+                <section class="analysis-method">
+
+                    <div class="method-header">
+
+                        <div class="method-icon file-method-icon">
+                            <span></span>
+                        </div>
+
+                        <div>
+                            <h2>Analyze Email File</h2>
+                            <p>
+                                Upload an <strong>.eml</strong> file
+                                for complete email analysis.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <form
+                        action="/analyze"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        id="fileForm"
+                    >
+
+                        <label
+                            class="upload-area"
+                            id="uploadArea"
+                        >
+
+                            <input
+                                type="file"
+                                name="email_file"
+                                id="emailFile"
+                                accept=".eml,message/rfc822"
+                            >
+
+                            <div class="upload-icon">
+                                +
+                            </div>
+
+                            <div class="upload-title">
+                                Upload an email file
+                            </div>
+
+                            <div class="upload-text">
+                                Drag and drop or click to browse
+                            </div>
+
+                            <div class="upload-format">
+                                Supported format: .eml | Maximum size: 5 MB
+                            </div>
+
+                        </label>
+
+                        <div
+                            id="fileStatus"
+                            class="file-status hidden"
+                        >
+
+                            <div class="file-status-icon">
+                                <span></span>
+                            </div>
+
+                            <div class="file-status-info">
+
+                                <strong id="fileName">
+                                    File selected
+                                </strong>
+
+                                <span id="fileDetails">
+                                    Ready for analysis
+                                </span>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                id="removeFile"
+                                class="remove-file"
+                            >
+                                Remove
+                            </button>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="analyze-button"
+                            id="fileAnalyzeButton"
+                            disabled
+                        >
+                            <span>Analyze Uploaded File</span>
+                            <span class="button-arrow">-&gt;</span>
+                        </button>
+
+                    </form>
+
+                </section>
+
+            </div>
+
+            <div class="security-notice">
+
+                <span class="notice-icon">!</span>
+
+                <div>
+                    <strong>Security Notice</strong>
+
+                    <p>
+                        Do not open suspicious links or attachments.
+                        Analyze the email first to identify potential threats.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="features">
+
+            <div class="feature-card">
+                <div class="feature-icon">+</div>
+
+                <h3>Phishing Detection</h3>
+
+                <p>
+                    Identifies urgent language, credential requests
+                    and common phishing patterns.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">+</div>
+
+                <h3>Header Analysis</h3>
+
+                <p>
+                    Checks sender, Reply-To and Return-Path information
+                    for suspicious mismatches.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">+</div>
+
+                <h3>URL Intelligence</h3>
+
+                <p>
+                    Analyzes links for unsafe schemes, IP addresses,
+                    suspicious paths and domains.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <span>Email Security Analyzer</span>
+        <span>Local threat analysis | No email is sent</span>
+    </footer>
+
+    <script>
+        const emailInput =
+            document.getElementById("email");
+
+        const textAnalyzeButton =
+            document.getElementById("textAnalyzeButton");
+
+        const textStatus =
+            document.getElementById("textStatus");
+
+        const textStatusDetails =
+            document.getElementById("textStatusDetails");
+
+        const emailFile =
+            document.getElementById("emailFile");
+
+        const fileAnalyzeButton =
+            document.getElementById("fileAnalyzeButton");
+
+        const fileStatus =
+            document.getElementById("fileStatus");
+
+        const fileName =
+            document.getElementById("fileName");
+
+        const fileDetails =
+            document.getElementById("fileDetails");
+
+        const removeFile =
+            document.getElementById("removeFile");
+
+        const uploadArea =
+            document.getElementById("uploadArea");
+
+        emailInput.addEventListener(
+            "input",
+            function () {
+
+                const hasText =
+                    emailInput.value.trim().length > 0;
+
+                textAnalyzeButton.disabled =
+                    !hasText;
+
+                if (hasText) {
+
+                    textStatus.classList.remove(
+                        "hidden"
+                    );
+
+                    textStatusDetails.textContent =
+                        emailInput.value.trim().length +
+                        " characters ready for analysis.";
+
+                } else {
+
+                    textStatus.classList.add(
+                        "hidden"
+                    );
+                }
+            }
+        );
+
+        emailFile.addEventListener(
+            "change",
+            function () {
+
+                if (!emailFile.files.length) {
+
+                    fileAnalyzeButton.disabled = true;
+
+                    fileStatus.classList.add(
+                        "hidden"
+                    );
+
+                    uploadArea.classList.remove(
+                        "file-selected"
+                    );
+
+                    return;
+                }
+
+                const file =
+                    emailFile.files[0];
+
+                if (!file.name.toLowerCase().endsWith(".eml")) {
+
+                    alert("Please select a valid .eml email file.");
+
+                    emailFile.value = "";
+
+                    fileAnalyzeButton.disabled = true;
+
+                    fileStatus.classList.add(
+                        "hidden"
+                    );
+
+                    return;
+                }
+
+                const sizeInMB =
+                    file.size / (1024 * 1024);
+
+                const sizeText =
+                    sizeInMB < 1
+                        ? Math.max(
+                            1,
+                            Math.round(file.size / 1024)
+                        ) + " KB"
+                        : sizeInMB.toFixed(2) + " MB";
+
+                fileName.textContent =
+                    file.name;
+
+                fileDetails.textContent =
+                    sizeText +
+                    " | .eml file ready for analysis";
+
+                fileStatus.classList.remove(
+                    "hidden"
+                );
+
+                uploadArea.classList.add(
+                    "file-selected"
+                );
+
+                fileAnalyzeButton.disabled =
+                    false;
+            }
+        );
+
+        removeFile.addEventListener(
+            "click",
+            function () {
+
+                emailFile.value = "";
+
+                fileStatus.classList.add(
+                    "hidden"
+                );
+
+                uploadArea.classList.remove(
+                    "file-selected"
+                );
+
+                fileAnalyzeButton.disabled =
+                    true;
+            }
+        );
+
+        uploadArea.addEventListener(
+            "dragover",
+            function (event) {
+
+                event.preventDefault();
+
+                uploadArea.classList.add(
+                    "drag-active"
+                );
+            }
+        );
+
+        uploadArea.addEventListener(
+            "dragleave",
+            function () {
+
+                uploadArea.classList.remove(
+                    "drag-active"
+                );
+            }
+        );
+
+        uploadArea.addEventListener(
+            "drop",
+            function (event) {
+
+                event.preventDefault();
+
+                uploadArea.classList.remove(
+                    "drag-active"
+                );
+
+                const files =
+                    event.dataTransfer.files;
+
+                if (files.length) {
+
+                    emailFile.files = files;
+
+                    emailFile.dispatchEvent(
+                        new Event("change")
+                    );
+                }
+            }
+        );
+    </script>
 
 </body>
 </html>

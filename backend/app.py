@@ -1,4 +1,4 @@
-import os
+﻿import os
 import sys
 
 project_root = os.path.abspath(
@@ -10,7 +10,7 @@ project_root = os.path.abspath(
 
 sys.path.insert(0, project_root)
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 
 from analyzer.email_parser import parse_email
 from analyzer.phishing_detector import detect_phishing
@@ -30,6 +30,14 @@ app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+@app.route("/style.css")
+def stylesheet():
+    return send_from_directory(
+        os.path.join(project_root, "frontend"),
+        "style.css"
+    )
 
 
 @app.route("/analyze", methods=["POST"])
@@ -63,22 +71,14 @@ def analyze():
         email_data["headers"]
     )
 
-    phishing_result["score"] = min(
-        phishing_result["score"] + header_result["score"],
-        100
-    )
-
-    phishing_result["reasons"].extend(
-        header_result["reasons"]
-    )
-
     url_result = analyze_urls(
         email_data["urls"]
     )
 
     risk_result = calculate_risk(
         phishing_result,
-        url_result
+        url_result,
+        header_result
     )
 
     risk_result["sender"] = email_data["headers"]["from"]
