@@ -6,3 +6,5 @@ env/
 .env
 uploads/*
 !uploads/.gitkeep
+
+*.eml
