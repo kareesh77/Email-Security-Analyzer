@@ -6,488 +6,415 @@
     <title>Email Security Analyzer</title>
     <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
 
-    <nav class="navbar">
-        <div class="brand">
-            <div class="brand-icon">E</div>
-            <div>
-                <div class="brand-name">Email Security Analyzer</div>
-                <div class="brand-subtitle">Threat Detection Platform</div>
-            </div>
-        </div>
+    <nav class="top-nav">
+        <a href="/" class="brand">
+            <span class="brand-mark">E</span>
+            <span>EMAIL SECURITY ANALYZER</span>
+        </a>
 
-        <div class="nav-status">
+        <div class="status">
             <span class="status-dot"></span>
-            Analysis Engine Online
+            LOCAL ANALYSIS
         </div>
     </nav>
 
     <main>
 
-        <section class="hero">
+        <section class="slide slide-one">
+            <div class="blue-orb orb-one"></div>
+            <div class="blue-orb orb-two"></div>
+            <div class="grid"></div>
 
-            <div class="hero-badge">
-                <span>●</span>
-                EMAIL THREAT ANALYSIS
+            <div class="slide-number">01 / 05</div>
+
+            <div class="hero-copy">
+                <div class="eyebrow">EMAIL THREAT ANALYSIS</div>
+
+                <h1>
+                    CHECK<br>
+                    YOUR EMAIL.
+                </h1>
+
+                <h2>KNOW THE RISK.</h2>
+
+                <p>
+                    Analyze headers, content, links and attachments
+                    to uncover suspicious behavior.
+                </p>
             </div>
 
-            <h1>
-                Analyze suspicious emails<br>
-                <span>before they become a threat.</span>
-            </h1>
+            <div class="email-demo">
+                <div class="email-window">
 
-            <p class="hero-text">
-                Analyze pasted email content or upload an email file
-                to detect phishing, spoofing, suspicious URLs and threats.
-            </p>
-
-        </section>
-
-        <section class="analyzer-card">
-
-            <div class="card-header">
-                <div>
-                    <h2>Choose Analysis Method</h2>
-                    <p>Select one of the two analysis options below.</p>
-                </div>
-
-                <div class="secure-badge">
-                    <span>[SECURE]</span>
-                    Secure Analysis
-                </div>
-            </div>
-
-            <div class="analysis-methods">
-
-                <section class="analysis-method">
-
-                    <div class="method-header">
-
-                        <div class="method-icon text-method-icon">
+                    <div class="email-top">
+                        <div class="window-dots">
+                            <span></span>
+                            <span></span>
                             <span></span>
                         </div>
 
-                        <div>
-                            <h2>Analyze Email Text</h2>
-                            <p>
-                                Paste the complete email content,
-                                including headers and message body.
-                            </p>
-                        </div>
-
+                        <span>MESSAGE PREVIEW</span>
                     </div>
 
-                    <form
-                        action="/analyze"
-                        method="POST"
-                        id="textForm"
-                    >
-
-                        <label for="email">
-                            Email Content
-                        </label>
-
-                        <textarea
-                            id="email"
-                            name="email"
-                            placeholder="Paste the complete email headers and message content here..."
-                        ></textarea>
-
-                        <div
-                            id="textStatus"
-                            class="input-status hidden"
-                        >
-                            <span class="status-check">OK</span>
-
-                            <div>
-                                <strong>
-                                    Email content ready
-                                </strong>
-
-                                <span id="textStatusDetails">
-                                    Ready for analysis.
-                                </span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="analyze-button"
-                            id="textAnalyzeButton"
-                            disabled
-                        >
-                            <span>Analyze Email Text</span>
-                            <span class="button-arrow">-&gt;</span>
-                        </button>
-
-                    </form>
-
-                </section>
-
-                <div class="method-divider">
-                    <span>OR</span>
-                </div>
-
-                <section class="analysis-method">
-
-                    <div class="method-header">
-
-                        <div class="method-icon file-method-icon">
-                            <span></span>
+                    <div class="email-information">
+                        <div>
+                            <small>FROM</small>
+                            <strong>security@example.com</strong>
                         </div>
 
                         <div>
-                            <h2>Analyze Email File</h2>
-                            <p>
-                                Upload an <strong>.eml</strong> file
-                                for complete email analysis.
-                            </p>
+                            <small>SUBJECT</small>
+                            <strong>Important Account Notice</strong>
                         </div>
-
                     </div>
 
-                    <form
-                        action="/analyze"
-                        method="POST"
-                        enctype="multipart/form-data"
-                        id="fileForm"
-                    >
+                    <div class="email-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
 
-                        <label
-                            class="upload-area"
-                            id="uploadArea"
-                        >
-
-                            <input
-                                type="file"
-                                name="email_file"
-                                id="emailFile"
-                                accept=".eml,message/rfc822"
-                            >
-
-                            <div class="upload-icon">
-                                +
-                            </div>
-
-                            <div class="upload-title">
-                                Upload an email file
-                            </div>
-
-                            <div class="upload-text">
-                                Drag and drop or click to browse
-                            </div>
-
-                            <div class="upload-format">
-                                Supported format: .eml | Maximum size: 5 MB
-                            </div>
-
-                        </label>
-
-                        <div
-                            id="fileStatus"
-                            class="file-status hidden"
-                        >
-
-                            <div class="file-status-icon">
-                                <span></span>
-                            </div>
-
-                            <div class="file-status-info">
-
-                                <strong id="fileName">
-                                    File selected
-                                </strong>
-
-                                <span id="fileDetails">
-                                    Ready for analysis
-                                </span>
-
-                            </div>
-
-                            <button
-                                type="button"
-                                id="removeFile"
-                                class="remove-file"
-                            >
-                                Remove
-                            </button>
-
+                        <div class="fake-link">
+                            VERIFY ACCOUNT →
                         </div>
+                    </div>
 
-                        <button
-                            type="submit"
-                            class="analyze-button"
-                            id="fileAnalyzeButton"
-                            disabled
-                        >
-                            <span>Analyze Uploaded File</span>
-                            <span class="button-arrow">-&gt;</span>
-                        </button>
-
-                    </form>
-
-                </section>
-
-            </div>
-
-            <div class="security-notice">
-
-                <span class="notice-icon">!</span>
-
-                <div>
-                    <strong>Security Notice</strong>
-
-                    <p>
-                        Do not open suspicious links or attachments.
-                        Analyze the email first to identify potential threats.
-                    </p>
+                    <div class="scan-line"></div>
                 </div>
 
+                <span class="scan-text">SCANNING MESSAGE</span>
             </div>
 
+            <div class="scroll-message">
+                <span>SCROLL TO INSPECT THE EMAIL</span>
+                <b>↓</b>
+            </div>
+
+            <div class="demo-text">DEMO</div>
         </section>
 
-        <section class="features">
 
-            <div class="feature-card">
-                <div class="feature-icon">+</div>
+        <section class="slide slide-two">
 
-                <h3>Phishing Detection</h3>
+            <div class="slide-number">02 / 05</div>
+
+            <div class="detect-title">
+                <div class="eyebrow">DETECTION ENGINE</div>
+
+                <h2>
+                    WE DON'T JUST<br>
+                    READ IT.
+                </h2>
+
+                <h1>WE DETECT.</h1>
+            </div>
+
+            <div class="detection-system">
+
+                <div class="detect-card detect-top">
+                    <span class="detect-icon">P</span>
+                    <div>
+                        <strong>PHISHING</strong>
+                        <small>LANGUAGE ANALYSIS</small>
+                    </div>
+                    <span class="checked">✓</span>
+                </div>
+
+                <div class="detect-card detect-left">
+                    <span class="detect-icon">H</span>
+                    <div>
+                        <strong>HEADERS</strong>
+                        <small>SENDER IDENTITY</small>
+                    </div>
+                    <span class="checked">✓</span>
+                </div>
+
+                <div class="center-email">
+                    <div class="center-email-top">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <small>EMAIL</small>
+                    </div>
+
+                    <div class="center-email-body">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i class="blue-line"></i>
+                    </div>
+
+                    <div class="center-scan"></div>
+                </div>
+
+                <div class="detect-card detect-right">
+                    <span class="detect-icon">U</span>
+                    <div>
+                        <strong>URLS</strong>
+                        <small>LINK INTELLIGENCE</small>
+                    </div>
+                    <span class="checked">✓</span>
+                </div>
+
+                <div class="detect-card detect-bottom">
+                    <span class="detect-icon">A</span>
+                    <div>
+                        <strong>ATTACHMENTS</strong>
+                        <small>FILE ANALYSIS</small>
+                    </div>
+                    <span class="checked">✓</span>
+                </div>
+
+                <div class="connection connection-one"></div>
+                <div class="connection connection-two"></div>
+                <div class="connection connection-three"></div>
+                <div class="connection connection-four"></div>
+
+            </div>
+
+            <div class="slide-footer">
+                <span>04 ANALYSIS SIGNALS</span>
+                <span>SCROLL TO CONTINUE ↓</span>
+            </div>
+        </section>
+
+
+        <section class="slide slide-three">
+
+            <div class="slide-number">03 / 05</div>
+
+            <div class="score-grid"></div>
+
+            <div class="score-copy">
+                <div class="eyebrow">RISK ENGINE</div>
+
+                <h2>THE SIGNALS</h2>
+
+                <h1>BECOME A SCORE.</h1>
 
                 <p>
-                    Identifies urgent language, credential requests
-                    and common phishing patterns.
+                    Every signal contributes to a single risk assessment.
+                    More evidence. More confidence.
                 </p>
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">+</div>
+            <div class="score-panel">
 
-                <h3>Header Analysis</h3>
+                <div class="score-circle">
+                    <div class="score-circle-inner">
+                        <strong>73</strong>
+                        <span>/100</span>
+                    </div>
+                </div>
 
-                <p>
-                    Checks sender, Reply-To and Return-Path information
-                    for suspicious mismatches.
-                </p>
+                <div class="score-label">
+                    <span>RISK SCORE</span>
+                    <strong>HIGH RISK</strong>
+                </div>
+
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">+</div>
+            <div class="score-breakdown">
 
-                <h3>URL Intelligence</h3>
+                <div class="score-row">
+                    <div class="score-row-name">
+                        <span>PHISHING DETECTION</span>
+                        <strong>85</strong>
+                    </div>
+
+                    <div class="score-bar">
+                        <span style="width:85%"></span>
+                    </div>
+                </div>
+
+                <div class="score-row">
+                    <div class="score-row-name">
+                        <span>HEADER ANALYSIS</span>
+                        <strong>55</strong>
+                    </div>
+
+                    <div class="score-bar">
+                        <span style="width:55%"></span>
+                    </div>
+                </div>
+
+                <div class="score-row">
+                    <div class="score-row-name">
+                        <span>URL INTELLIGENCE</span>
+                        <strong>65</strong>
+                    </div>
+
+                    <div class="score-bar">
+                        <span style="width:65%"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="slide-footer">
+                <span>50% PHISHING · 20% HEADERS · 30% URLS</span>
+                <span>SCROLL FOR THE VERDICT ↓</span>
+            </div>
+        </section>
+
+
+        <section class="slide slide-four">
+
+            <div class="verdict-number">04 / 05</div>
+
+            <div class="verdict-background"></div>
+
+            <div class="verdict-heading">
+                <div class="eyebrow">FINAL ASSESSMENT</div>
+
+                <p>EVERY SIGNAL HAS BEEN WEIGHED.</p>
+
+                <h1>THE VERDICT.</h1>
+            </div>
+
+            <div class="verdict-card">
+
+                <div class="verdict-card-top">
+                    <span>ANALYSIS COMPLETE</span>
+                    <span>● VERIFIED</span>
+                </div>
+
+                <div class="danger-title">
+                    DANGEROUS
+                </div>
+
+                <div class="danger-score">
+                    73<span>/100</span>
+                </div>
+
+                <div class="confidence-row">
+                    <span>CONFIDENCE</span>
+                    <strong>HIGH</strong>
+                </div>
+
+                <div class="reason-list">
+
+                    <div>
+                        <b>01</b>
+                        Suspicious sender identity
+                    </div>
+
+                    <div>
+                        <b>02</b>
+                        Credential request detected
+                    </div>
+
+                    <div>
+                        <b>03</b>
+                        Unsafe link detected
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="verdict-scale">
+                <span>SAFE</span>
+                <div></div>
+                <strong>DANGEROUS</strong>
+            </div>
+
+            <div class="slide-footer">
+                <span>THREAT CLASSIFICATION</span>
+                <span>SCROLL TO ANALYZE YOURS ↓</span>
+            </div>
+        </section>
+
+
+        <section class="slide slide-five">
+
+            <div class="slide-number">05 / 05</div>
+
+            <div class="analyze-background"></div>
+
+            <div class="analyze-copy">
+
+                <div class="eyebrow">YOUR TURN</div>
+
+                <h1>
+                    ANALYZE<br>
+                    YOURS.
+                </h1>
 
                 <p>
-                    Analyzes links for unsafe schemes, IP addresses,
-                    suspicious paths and domains.
+                    Paste an email or upload an <strong>.eml</strong> file.
+                    Your message will be analyzed locally.
                 </p>
+
+                <div class="analysis-features">
+                    <span>HEADERS</span>
+                    <span>CONTENT</span>
+                    <span>URLS</span>
+                    <span>ATTACHMENTS</span>
+                </div>
+
+            </div>
+
+            <form
+                class="analysis-form"
+                action="/analyze"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                <div class="form-top">
+                    <span>EMAIL INPUT</span>
+                    <span>LOCAL PROCESSING</span>
+                </div>
+
+                <textarea
+                    name="email"
+                    placeholder="Paste the complete email here..."
+                ></textarea>
+
+                <div class="form-bottom">
+
+                    <label class="upload-button">
+                        <input
+                            type="file"
+                            name="email_file"
+                            accept=".eml"
+                        >
+
+                        <span class="upload-symbol">↑</span>
+
+                        <span>
+                            <strong>UPLOAD .EML</strong>
+                            <small>MAX 5 MB</small>
+                        </span>
+                    </label>
+
+                    <button
+                        type="submit"
+                        class="analyze-button"
+                    >
+                        <span>ANALYZE EMAIL</span>
+                        <b>→</b>
+                    </button>
+
+                </div>
+
+            </form>
+
+            <div class="privacy-note">
+                LOCAL · PRIVATE · FAST
+            </div>
+
+            <div class="slide-footer">
+                <span>EMAIL SECURITY ANALYZER</span>
+                <span>ANALYSIS COMPLETE</span>
             </div>
 
         </section>
 
     </main>
-
-    <footer>
-        <span>Email Security Analyzer</span>
-        <span>Local threat analysis | No email is sent</span>
-    </footer>
-
-    <script>
-        const emailInput =
-            document.getElementById("email");
-
-        const textAnalyzeButton =
-            document.getElementById("textAnalyzeButton");
-
-        const textStatus =
-            document.getElementById("textStatus");
-
-        const textStatusDetails =
-            document.getElementById("textStatusDetails");
-
-        const emailFile =
-            document.getElementById("emailFile");
-
-        const fileAnalyzeButton =
-            document.getElementById("fileAnalyzeButton");
-
-        const fileStatus =
-            document.getElementById("fileStatus");
-
-        const fileName =
-            document.getElementById("fileName");
-
-        const fileDetails =
-            document.getElementById("fileDetails");
-
-        const removeFile =
-            document.getElementById("removeFile");
-
-        const uploadArea =
-            document.getElementById("uploadArea");
-
-        emailInput.addEventListener(
-            "input",
-            function () {
-
-                const hasText =
-                    emailInput.value.trim().length > 0;
-
-                textAnalyzeButton.disabled =
-                    !hasText;
-
-                if (hasText) {
-
-                    textStatus.classList.remove(
-                        "hidden"
-                    );
-
-                    textStatusDetails.textContent =
-                        emailInput.value.trim().length +
-                        " characters ready for analysis.";
-
-                } else {
-
-                    textStatus.classList.add(
-                        "hidden"
-                    );
-                }
-            }
-        );
-
-        emailFile.addEventListener(
-            "change",
-            function () {
-
-                if (!emailFile.files.length) {
-
-                    fileAnalyzeButton.disabled = true;
-
-                    fileStatus.classList.add(
-                        "hidden"
-                    );
-
-                    uploadArea.classList.remove(
-                        "file-selected"
-                    );
-
-                    return;
-                }
-
-                const file =
-                    emailFile.files[0];
-
-                if (!file.name.toLowerCase().endsWith(".eml")) {
-
-                    alert("Please select a valid .eml email file.");
-
-                    emailFile.value = "";
-
-                    fileAnalyzeButton.disabled = true;
-
-                    fileStatus.classList.add(
-                        "hidden"
-                    );
-
-                    return;
-                }
-
-                const sizeInMB =
-                    file.size / (1024 * 1024);
-
-                const sizeText =
-                    sizeInMB < 1
-                        ? Math.max(
-                            1,
-                            Math.round(file.size / 1024)
-                        ) + " KB"
-                        : sizeInMB.toFixed(2) + " MB";
-
-                fileName.textContent =
-                    file.name;
-
-                fileDetails.textContent =
-                    sizeText +
-                    " | .eml file ready for analysis";
-
-                fileStatus.classList.remove(
-                    "hidden"
-                );
-
-                uploadArea.classList.add(
-                    "file-selected"
-                );
-
-                fileAnalyzeButton.disabled =
-                    false;
-            }
-        );
-
-        removeFile.addEventListener(
-            "click",
-            function () {
-
-                emailFile.value = "";
-
-                fileStatus.classList.add(
-                    "hidden"
-                );
-
-                uploadArea.classList.remove(
-                    "file-selected"
-                );
-
-                fileAnalyzeButton.disabled =
-                    true;
-            }
-        );
-
-        uploadArea.addEventListener(
-            "dragover",
-            function (event) {
-
-                event.preventDefault();
-
-                uploadArea.classList.add(
-                    "drag-active"
-                );
-            }
-        );
-
-        uploadArea.addEventListener(
-            "dragleave",
-            function () {
-
-                uploadArea.classList.remove(
-                    "drag-active"
-                );
-            }
-        );
-
-        uploadArea.addEventListener(
-            "drop",
-            function (event) {
-
-                event.preventDefault();
-
-                uploadArea.classList.remove(
-                    "drag-active"
-                );
-
-                const files =
-                    event.dataTransfer.files;
-
-                if (files.length) {
-
-                    emailFile.files = files;
-
-                    emailFile.dispatchEvent(
-                        new Event("change")
-                    );
-                }
-            }
-        );
-    </script>
 
 </body>
 </html>

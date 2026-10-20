@@ -6,386 +6,427 @@
     <title>Email Security Report</title>
     <link rel="stylesheet" href="/style.css">
 </head>
-<body>
 
-    <nav class="navbar">
-        <div class="brand">
-            <div class="brand-icon">E</div>
-            <div>
-                <div class="brand-name">Email Security Analyzer</div>
-                <div class="brand-subtitle">Threat Detection Platform</div>
-            </div>
-        </div>
+<body class="report-page">
 
-        <div class="nav-status">
+    <nav class="top-nav">
+        <a href="/" class="brand">
+            <span class="brand-mark">E</span>
+            <span>EMAIL SECURITY ANALYZER</span>
+        </a>
+
+        <div class="status">
             <span class="status-dot"></span>
-            Analysis Complete
+            LOCAL ANALYSIS
         </div>
     </nav>
 
+    {% if result is mapping %}
+
     <main class="report-container">
 
-        {% if result is string %}
+        <section class="report-hero">
 
-            <section class="error-card">
-                <div class="section-icon">!</div>
-                <div>
-                    <h2>Analysis Error</h2>
-                    <p>{{ result }}</p>
-                </div>
-            </section>
-
-        {% else %}
-
-            <section class="report-header">
-                <div>
-                    <div class="report-badge">
-                        SECURITY ANALYSIS REPORT
-                    </div>
-
-                    <h1>Email Threat Assessment</h1>
-
-                    <p>
-                        Automated analysis of email content, headers,
-                        URLs and attachments.
-                    </p>
+            <div>
+                <div class="report-eyebrow">
+                    SECURITY ANALYSIS REPORT
                 </div>
 
-                <div class="report-status">
-                    <span class="status-dot"></span>
-                    Analysis Complete
-                </div>
-            </section>
-
-            <section class="risk-dashboard">
-
-                <div class="risk-score-card">
-
-                    <div class="risk-label">
-                        OVERALL RISK SCORE
-                    </div>
-
-                    <div class="risk-score">
-                        {{ result.score }}
-                        <span>/100</span>
-                    </div>
-
-                    <div class="risk-meter">
-                        <div
-                            class="risk-meter-fill {{ result.verdict|lower }}"
-                            style="width: {{ result.score }}%"
-                        ></div>
-                    </div>
-
-                    <div class="risk-scale">
-                        <span>LOW</span>
-                        <span>MEDIUM</span>
-                        <span>HIGH</span>
-                    </div>
-
-                </div>
-
-                <div class="verdict-card {{ result.verdict|lower }}">
-
-                    <div class="verdict-label">
-                        FINAL VERDICT
-                    </div>
-
-                    <div class="verdict-title">
-                        {{ result.verdict }}
-                    </div>
-
-                    <div class="confidence-label">
-                        Confidence
-                    </div>
-
-                    <div class="confidence-value">
-                        {{ result.confidence }}
-                    </div>
-
-                </div>
-
-            </section>
-
-            <section class="breakdown-card">
-
-                <div class="section-heading">
-                    <div class="section-icon">RISK</div>
-
-                    <div>
-                        <h2>Risk Breakdown</h2>
-                        <p>How the final risk score was calculated</p>
-                    </div>
-                </div>
-
-                <div class="breakdown-list">
-
-                    <div class="breakdown-row">
-                        <div class="breakdown-info">
-                            <strong>Phishing Detection</strong>
-                            <span>
-                                {{ result.breakdown.phishing.raw_score }}/100
-                                weighted at {{ result.breakdown.phishing.weight }}%
-                            </span>
-                        </div>
-
-                        <div class="breakdown-bar">
-                            <div
-                                class="breakdown-fill phishing-fill"
-                                style="width: {{ result.breakdown.phishing.raw_score }}%"
-                            ></div>
-                        </div>
-
-                        <strong class="breakdown-value">
-                            +{{ result.breakdown.phishing.contribution }}
-                        </strong>
-                    </div>
-
-                    <div class="breakdown-row">
-                        <div class="breakdown-info">
-                            <strong>Header Analysis</strong>
-                            <span>
-                                {{ result.breakdown.headers.raw_score }}/100
-                                weighted at {{ result.breakdown.headers.weight }}%
-                            </span>
-                        </div>
-
-                        <div class="breakdown-bar">
-                            <div
-                                class="breakdown-fill header-fill"
-                                style="width: {{ result.breakdown.headers.raw_score }}%"
-                            ></div>
-                        </div>
-
-                        <strong class="breakdown-value">
-                            +{{ result.breakdown.headers.contribution }}
-                        </strong>
-                    </div>
-
-                    <div class="breakdown-row">
-                        <div class="breakdown-info">
-                            <strong>URL Intelligence</strong>
-                            <span>
-                                {{ result.breakdown.urls.raw_score }}/100
-                                weighted at {{ result.breakdown.urls.weight }}%
-                            </span>
-                        </div>
-
-                        <div class="breakdown-bar">
-                            <div
-                                class="breakdown-fill url-fill"
-                                style="width: {{ result.breakdown.urls.raw_score }}%"
-                            ></div>
-                        </div>
-
-                        <strong class="breakdown-value">
-                            +{{ result.breakdown.urls.contribution }}
-                        </strong>
-                    </div>
-
-                </div>
-
-                <div class="breakdown-total">
-                    <span>Final Risk Score</span>
-                    <strong>{{ result.score }}/100</strong>
-                </div>
-
-            </section>
-
-            <section class="email-card">
-
-                <div class="section-heading">
-                    <div class="section-icon">MAIL</div>
-
-                    <div>
-                        <h2>Email Information</h2>
-                        <p>Basic metadata extracted from the analyzed message</p>
-                    </div>
-                </div>
-
-                <div class="email-grid">
-
-                    <div class="email-field">
-                        <span>FROM</span>
-                        <strong>
-                            {{ result.sender if result.sender else "Not provided" }}
-                        </strong>
-                    </div>
-
-                    <div class="email-field">
-                        <span>SUBJECT</span>
-                        <strong>
-                            {{ result.subject if result.subject else "Not provided" }}
-                        </strong>
-                    </div>
-
-                </div>
-
-            </section>
-
-            <section class="findings-card">
-
-                <div class="section-heading">
-                    <div class="section-icon">THREAT</div>
-
-                    <div>
-                        <h2>Threat Intelligence</h2>
-                        <p>Indicators identified during the analysis</p>
-                    </div>
-                </div>
-
-                <div class="analysis-grid">
-
-                    <div class="threat-category phishing-category">
-                        <div class="category-header">
-                            <div>
-                                <span class="category-label">CATEGORY</span>
-                                <h3>Phishing Detection</h3>
-                            </div>
-
-                            <span class="category-count">
-                                {{ result.findings.phishing|length }}
-                            </span>
-                        </div>
-
-                        {% if result.findings.phishing %}
-                            <ul class="finding-list">
-                                {% for reason in result.findings.phishing %}
-                                    <li>{{ reason }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <div class="clean-message">
-                                No phishing indicators detected.
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="threat-category header-category">
-                        <div class="category-header">
-                            <div>
-                                <span class="category-label">CATEGORY</span>
-                                <h3>Header Analysis</h3>
-                            </div>
-
-                            <span class="category-count">
-                                {{ result.findings.headers|length }}
-                            </span>
-                        </div>
-
-                        {% if result.findings.headers %}
-                            <ul class="finding-list">
-                                {% for reason in result.findings.headers %}
-                                    <li>{{ reason }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <div class="clean-message">
-                                No header anomalies detected.
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="threat-category url-category">
-                        <div class="category-header">
-                            <div>
-                                <span class="category-label">CATEGORY</span>
-                                <h3>URL Intelligence</h3>
-                            </div>
-
-                            <span class="category-count">
-                                {{ result.findings.urls|length }}
-                            </span>
-                        </div>
-
-                        {% if result.findings.urls %}
-                            <ul class="finding-list">
-                                {% for reason in result.findings.urls %}
-                                    <li>{{ reason }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <div class="clean-message">
-                                No suspicious URL indicators detected.
-                            </div>
-                        {% endif %}
-                    </div>
-
-                </div>
-
-            </section>
-
-            <section class="links-card">
-
-                <div class="section-heading">
-                    <div class="section-icon">URL</div>
-
-                    <div>
-                        <h2>Detected Links</h2>
-                        <p>URLs extracted from the email content</p>
-                    </div>
-                </div>
-
-                {% if result.urls %}
-                    <div class="url-list">
-                        {% for url in result.urls %}
-                            <div class="url-item">
-                                <span class="url-indicator"></span>
-                                <span>{{ url }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <div class="empty-state">
-                        No links detected in this email.
-                    </div>
-                {% endif %}
-
-            </section>
-
-            <section class="attachments-card">
-
-                <div class="section-heading">
-                    <div class="section-icon">FILE</div>
-
-                    <div>
-                        <h2>Detected Attachments</h2>
-                        <p>Files found inside the email</p>
-                    </div>
-                </div>
-
-                {% if result.attachments %}
-                    <div class="attachment-list">
-                        {% for attachment in result.attachments %}
-                            <div class="attachment-item">
-                                <span class="attachment-icon">FILE</span>
-                                <span>{{ attachment }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <div class="empty-state">
-                        No attachments detected.
-                    </div>
-                {% endif %}
-
-            </section>
-
-            <div class="report-actions">
-                <a href="/" class="new-analysis-button">
-                    <span class="button-icon">+</span>
-                    <span>New Analysis</span>
-                </a>
+                <h1>EMAIL<br><span>ANALYSIS.</span></h1>
+
+                <p>
+                    Your message has been inspected across content,
+                    headers, links and attachments.
+                </p>
             </div>
 
-        {% endif %}
+            <div class="report-status-card">
+
+                <div class="report-status-top">
+                    <span>ANALYSIS COMPLETE</span>
+                    <span class="live-status">● LIVE</span>
+                </div>
+
+                <div class="report-verdict">
+                    {{ result.verdict }}
+                </div>
+
+                <div class="report-score">
+                    {{ result.score }}<span>/100</span>
+                </div>
+
+                <div class="report-confidence">
+                    <span>CONFIDENCE</span>
+                    <strong>{{ result.confidence }}</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="risk-overview">
+
+            <div class="section-heading">
+                <span>01</span>
+                <div>
+                    <small>RISK OVERVIEW</small>
+                    <h2>THE SIGNALS.</h2>
+                </div>
+            </div>
+
+            <div class="risk-cards">
+
+                <div class="risk-card">
+                    <span>PHISHING</span>
+                    <strong>{{ result.breakdown.phishing.raw_score }}</strong>
+
+                    <div class="risk-bar">
+                        <span style="width: {{ result.breakdown.phishing.raw_score }}%"></span>
+                    </div>
+
+                    <small>50% WEIGHT</small>
+                </div>
+
+                <div class="risk-card">
+                    <span>HEADERS</span>
+                    <strong>{{ result.breakdown.headers.raw_score }}</strong>
+
+                    <div class="risk-bar">
+                        <span style="width: {{ result.breakdown.headers.raw_score }}%"></span>
+                    </div>
+
+                    <small>20% WEIGHT</small>
+                </div>
+
+                <div class="risk-card">
+                    <span>URL INTELLIGENCE</span>
+                    <strong>{{ result.breakdown.urls.raw_score }}</strong>
+
+                    <div class="risk-bar">
+                        <span style="width: {{ result.breakdown.urls.raw_score }}%"></span>
+                    </div>
+
+                    <small>30% WEIGHT</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="email-report-section">
+
+            <div class="section-heading">
+                <span>02</span>
+                <div>
+                    <small>INPUT RECEIVED</small>
+                    <h2>YOUR EMAIL.</h2>
+                </div>
+            </div>
+
+            <div class="input-source">
+                <span class="source-dot"></span>
+                {{ input_type }}
+            </div>
+
+            <div class="email-content-panel">
+
+                <div class="email-content-top">
+                    <span>EMAIL CONTENT</span>
+                    <span>READ ONLY</span>
+                </div>
+
+                <pre>{{ email_content }}</pre>
+
+            </div>
+
+        </section>
+
+
+        <section class="email-information-section">
+
+            <div class="section-heading">
+                <span>03</span>
+                <div>
+                    <small>MESSAGE METADATA</small>
+                    <h2>EMAIL INFORMATION.</h2>
+                </div>
+            </div>
+
+            <div class="metadata-grid">
+
+                <div class="metadata-item">
+                    <small>FROM</small>
+                    <strong>{{ result.sender or "Not detected" }}</strong>
+                </div>
+
+                <div class="metadata-item">
+                    <small>TO</small>
+                    <strong>{{ result.recipient or "Not detected" }}</strong>
+                </div>
+
+                <div class="metadata-item metadata-wide">
+                    <small>SUBJECT</small>
+                    <strong>{{ result.subject or "No subject detected" }}</strong>
+                </div>
+
+                <div class="metadata-item">
+                    <small>REPLY-TO</small>
+                    <strong>{{ result.reply_to or "Not provided" }}</strong>
+                </div>
+
+                <div class="metadata-item">
+                    <small>RETURN-PATH</small>
+                    <strong>{{ result.return_path or "Not provided" }}</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="findings-section">
+
+            <div class="section-heading">
+                <span>04</span>
+                <div>
+                    <small>THREAT INTELLIGENCE</small>
+                    <h2>WHAT WE FOUND.</h2>
+                </div>
+            </div>
+
+
+            <div class="finding-group">
+
+                <div class="finding-header">
+                    <div>
+                        <span class="finding-number">01</span>
+                        <strong>PHISHING DETECTION</strong>
+                    </div>
+
+                    <span>{{ result.breakdown.phishing.raw_score }}/100</span>
+                </div>
+
+                {% if result.findings.phishing %}
+
+                    {% for reason in result.findings.phishing %}
+                    <div class="finding-row">
+                        <span class="finding-check">✓</span>
+                        <span>{{ reason }}</span>
+                    </div>
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="finding-empty">
+                        No phishing indicators detected.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="finding-group">
+
+                <div class="finding-header">
+                    <div>
+                        <span class="finding-number">02</span>
+                        <strong>HEADER ANALYSIS</strong>
+                    </div>
+
+                    <span>{{ result.breakdown.headers.raw_score }}/100</span>
+                </div>
+
+                {% if result.findings.headers %}
+
+                    {% for reason in result.findings.headers %}
+                    <div class="finding-row">
+                        <span class="finding-check">✓</span>
+                        <span>{{ reason }}</span>
+                    </div>
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="finding-empty">
+                        No suspicious header indicators detected.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="finding-group">
+
+                <div class="finding-header">
+                    <div>
+                        <span class="finding-number">03</span>
+                        <strong>URL INTELLIGENCE</strong>
+                    </div>
+
+                    <span>{{ result.breakdown.urls.raw_score }}/100</span>
+                </div>
+
+                {% if result.findings.urls %}
+
+                    {% for reason in result.findings.urls %}
+                    <div class="finding-row">
+                        <span class="finding-check">✓</span>
+                        <span>{{ reason }}</span>
+                    </div>
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="finding-empty">
+                        No suspicious URL indicators detected.
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <section class="links-section">
+
+            <div class="section-heading">
+                <span>05</span>
+                <div>
+                    <small>LINK INTELLIGENCE</small>
+                    <h2>DETECTED LINKS.</h2>
+                </div>
+            </div>
+
+            {% if result.urls %}
+
+                <div class="detected-links">
+
+                    {% for url in result.urls %}
+                    <div class="detected-link">
+                        <span class="link-index">
+                            {{ "%02d"|format(loop.index) }}
+                        </span>
+
+                        <span class="link-value">
+                            {{ url }}
+                        </span>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-panel">
+                    <span>✓</span>
+                    No links were detected in this email.
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <section class="attachments-section">
+
+            <div class="section-heading">
+                <span>06</span>
+                <div>
+                    <small>FILE INTELLIGENCE</small>
+                    <h2>ATTACHMENTS.</h2>
+                </div>
+            </div>
+
+            {% if result.attachments %}
+
+                <div class="attachment-list">
+
+                    {% for attachment in result.attachments %}
+                    <div class="attachment-item">
+                        <span>FILE</span>
+                        <strong>{{ attachment }}</strong>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-panel">
+                    <span>✓</span>
+                    No attachments were detected.
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <section class="final-report">
+
+            <div>
+                <small>FINAL ASSESSMENT</small>
+
+                <h2>
+                    {{ result.verdict }}
+                </h2>
+
+                <p>
+                    Risk score {{ result.score }}/100 with
+                    {{ result.confidence|lower }} confidence.
+                </p>
+            </div>
+
+            <div class="final-score">
+                <strong>{{ result.score }}</strong>
+                <span>/100</span>
+            </div>
+
+        </section>
+
+
+        <div class="report-actions">
+            <a href="/" class="new-analysis-button">
+                <span class="button-icon">+</span>
+                <span>NEW ANALYSIS</span>
+            </a>
+        </div>
+
+
+        <footer class="report-footer">
+            <span>EMAIL SECURITY ANALYZER</span>
+            <span>LOCAL · PRIVATE · FAST</span>
+        </footer>
 
     </main>
 
-    <footer>
-        <span>Email Security Analyzer</span>
-        <span>Local threat analysis | No email is sent</span>
-    </footer>
+    {% else %}
+
+    <main class="error-report">
+
+        <div class="error-icon">!</div>
+
+        <div class="report-eyebrow">
+            ANALYSIS INPUT
+        </div>
+
+        <h1>UNABLE TO<br><span>ANALYZE.</span></h1>
+
+        <p>{{ result }}</p>
+
+        <a href="/" class="new-analysis-button">
+            <span class="button-icon">+</span>
+            <span>NEW ANALYSIS</span>
+        </a>
+
+    </main>
+
+    {% endif %}
 
 </body>
 </html>
