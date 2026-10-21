@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
 
 <body>
 
-    <nav class="top-nav">
+    <header class="top-nav">
         <a href="/" class="brand">
             <span class="brand-mark">E</span>
             <span>EMAIL SECURITY ANALYZER</span>
@@ -17,404 +18,741 @@
 
         <div class="status">
             <span class="status-dot"></span>
-            LOCAL ANALYSIS
+            ANALYSIS ENGINE ONLINE
         </div>
-    </nav>
+    </header>
 
     <main>
 
         <section class="slide slide-one">
-            <div class="blue-orb orb-one"></div>
-            <div class="blue-orb orb-two"></div>
-            <div class="grid"></div>
-
-            <div class="slide-number">01 / 05</div>
 
             <div class="hero-copy">
-                <div class="eyebrow">EMAIL THREAT ANALYSIS</div>
+                <div class="eyebrow scroll-reveal">
+                    EMAIL THREAT INTELLIGENCE
+                </div>
 
-                <h1>
-                    CHECK<br>
-                    YOUR EMAIL.
+                <h1 class="scroll-reveal scroll-reveal-delay-1">
+                    READ.<br>
+                    <span>CHECK.</span><br>
+                    PROTECT.
                 </h1>
 
-                <h2>KNOW THE RISK.</h2>
-
-                <p>
-                    Analyze headers, content, links and attachments
-                    to uncover suspicious behavior.
+                <p class="scroll-reveal scroll-reveal-delay-2">
+                    Analyze suspicious emails, inspect headers, detect phishing
+                    signals, scan URLs and identify potentially dangerous
+                    attachments before they become a security problem.
                 </p>
             </div>
 
-            <div class="email-demo">
+            <div class="check-here">
+                <span>CHECK HERE</span>
+                <i></i>
+            </div>
+
+            <div class="email-demo scroll-reveal scroll-reveal-delay-2">
+
                 <div class="email-window">
 
-                    <div class="email-top">
+                    <div class="window-top">
                         <div class="window-dots">
                             <span></span>
                             <span></span>
                             <span></span>
                         </div>
 
-                        <span>MESSAGE PREVIEW</span>
+                        <span>EMAIL ANALYSIS</span>
+
+                        <span class="window-status">
+                            READY
+                        </span>
                     </div>
 
-                    <div class="email-information">
-                        <div>
-                            <small>FROM</small>
-                            <strong>security@example.com</strong>
+                    <form id="analysisForm" action="/analyze" method="POST" enctype="multipart/form-data">
+
+                        <div class="input-label">
+                            <span>EMAIL CONTENT</span>
+                            <span id="inputStatus">WAITING FOR INPUT</span>
                         </div>
 
-                        <div>
-                            <small>SUBJECT</small>
-                            <strong>Important Account Notice</strong>
+                        <textarea id="emailInput" name="email"
+                            placeholder="Paste the complete email here..."></textarea>
+
+                        <div class="email-preview empty" id="emailPreview">
+
+                            <div class="preview-header">
+                                <span>LIVE EMAIL PREVIEW</span>
+                                <span id="previewType">NO INPUT</span>
+                            </div>
+
+                            <div class="preview-content">
+
+                                <div class="preview-row">
+                                    <span>FROM</span>
+                                    <strong id="previewFrom">—</strong>
+                                </div>
+
+                                <div class="preview-row">
+                                    <span>SUBJECT</span>
+                                    <strong id="previewSubject">—</strong>
+                                </div>
+
+                                <div class="preview-row">
+                                    <span>TO</span>
+                                    <strong id="previewTo">—</strong>
+                                </div>
+
+                                <div class="preview-body">
+                                    <span>MESSAGE</span>
+                                    <p id="previewBody">Paste an email to preview it here.</p>
+                                </div>
+
+                            </div>
+
                         </div>
-                    </div>
 
-                    <div class="email-lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <div class="upload-row">
 
-                        <div class="fake-link">
-                            VERIFY ACCOUNT →
+                            <label for="emailFile" class="upload-button">
+                                <span>+</span>
+                                UPLOAD .EML
+                            </label>
+
+                            <input type="file" id="emailFile" name="email_file" accept=".eml">
+
+                            <span class="file-name" id="fileName">
+                                No file selected
+                            </span>
+
                         </div>
-                    </div>
 
-                    <div class="scan-line"></div>
+                        <button type="submit" class="analyze-button" id="analyzeButton">
+                            <span>ANALYZE EMAIL</span>
+                            <span class="button-arrow">→</span>
+                        </button>
+
+                    </form>
+
                 </div>
 
-                <span class="scan-text">SCANNING MESSAGE</span>
             </div>
 
-            <div class="scroll-message">
-                <span>SCROLL TO INSPECT THE EMAIL</span>
-                <b>↓</b>
+            <div class="scroll-hint">
+                <span class="scroll-line"></span>
+                SCROLL TO EXPLORE
             </div>
 
-            <div class="demo-text">DEMO</div>
         </section>
 
 
         <section class="slide slide-two">
 
-            <div class="slide-number">02 / 05</div>
+            <div class="section-intro">
 
-            <div class="detect-title">
-                <div class="eyebrow">DETECTION ENGINE</div>
-
-                <h2>
-                    WE DON'T JUST<br>
-                    READ IT.
-                </h2>
-
-                <h1>WE DETECT.</h1>
-            </div>
-
-            <div class="detection-system">
-
-                <div class="detect-card detect-top">
-                    <span class="detect-icon">P</span>
-                    <div>
-                        <strong>PHISHING</strong>
-                        <small>LANGUAGE ANALYSIS</small>
-                    </div>
-                    <span class="checked">✓</span>
+                <div class="section-number">
+                    01 / DETECTION
                 </div>
 
-                <div class="detect-card detect-left">
-                    <span class="detect-icon">H</span>
-                    <div>
-                        <strong>HEADERS</strong>
-                        <small>SENDER IDENTITY</small>
-                    </div>
-                    <span class="checked">✓</span>
+                <div>
+                    <small class="scroll-reveal">
+                        MULTI-LAYER ANALYSIS
+                    </small>
+
+                    <h2 class="scroll-reveal scroll-reveal-delay-1">
+                        EVERY EMAIL<br>
+                        LEAVES <span>CLUES.</span>
+                    </h2>
+
+                    <p class="scroll-reveal scroll-reveal-delay-2">
+                        The analyzer examines multiple parts of an email to
+                        identify signals that may indicate phishing,
+                        impersonation, malicious links or suspicious behavior.
+                    </p>
                 </div>
-
-                <div class="center-email">
-                    <div class="center-email-top">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <small>EMAIL</small>
-                    </div>
-
-                    <div class="center-email-body">
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i class="blue-line"></i>
-                    </div>
-
-                    <div class="center-scan"></div>
-                </div>
-
-                <div class="detect-card detect-right">
-                    <span class="detect-icon">U</span>
-                    <div>
-                        <strong>URLS</strong>
-                        <small>LINK INTELLIGENCE</small>
-                    </div>
-                    <span class="checked">✓</span>
-                </div>
-
-                <div class="detect-card detect-bottom">
-                    <span class="detect-icon">A</span>
-                    <div>
-                        <strong>ATTACHMENTS</strong>
-                        <small>FILE ANALYSIS</small>
-                    </div>
-                    <span class="checked">✓</span>
-                </div>
-
-                <div class="connection connection-one"></div>
-                <div class="connection connection-two"></div>
-                <div class="connection connection-three"></div>
-                <div class="connection connection-four"></div>
 
             </div>
 
-            <div class="slide-footer">
-                <span>04 ANALYSIS SIGNALS</span>
-                <span>SCROLL TO CONTINUE ↓</span>
+            <div class="detection-grid">
+
+                <div class="detection-card scroll-reveal">
+                    <span class="detection-check">01</span>
+                    <span class="detection-letter">H</span>
+                    <strong>HEADERS</strong>
+                    <small>
+                        Sender identity, Reply-To and Return-Path analysis
+                    </small>
+                </div>
+
+                <div class="detection-card scroll-reveal scroll-reveal-delay-1">
+                    <span class="detection-check">02</span>
+                    <span class="detection-letter">P</span>
+                    <strong>PHISHING</strong>
+                    <small>
+                        Urgency, sensitive requests and suspicious language
+                    </small>
+                </div>
+
+                <div class="detection-card scroll-reveal scroll-reveal-delay-2">
+                    <span class="detection-check">03</span>
+                    <span class="detection-letter">U</span>
+                    <strong>URLS</strong>
+                    <small>
+                        Links, domains, redirects and suspicious patterns
+                    </small>
+                </div>
+
+                <div class="detection-card scroll-reveal scroll-reveal-delay-3">
+                    <span class="detection-check">04</span>
+                    <span class="detection-letter">A</span>
+                    <strong>ATTACHMENTS</strong>
+                    <small>
+                        File names and potentially dangerous extensions
+                    </small>
+                </div>
+
             </div>
+
         </section>
 
 
         <section class="slide slide-three">
 
-            <div class="slide-number">03 / 05</div>
+            <div class="section-intro">
 
-            <div class="score-grid"></div>
-
-            <div class="score-copy">
-                <div class="eyebrow">RISK ENGINE</div>
-
-                <h2>THE SIGNALS</h2>
-
-                <h1>BECOME A SCORE.</h1>
-
-                <p>
-                    Every signal contributes to a single risk assessment.
-                    More evidence. More confidence.
-                </p>
-            </div>
-
-            <div class="score-panel">
-
-                <div class="score-circle">
-                    <div class="score-circle-inner">
-                        <strong>73</strong>
-                        <span>/100</span>
-                    </div>
+                <div class="section-number">
+                    02 / RISK
                 </div>
 
-                <div class="score-label">
-                    <span>RISK SCORE</span>
-                    <strong>HIGH RISK</strong>
+                <div>
+                    <small class="scroll-reveal">
+                        THREAT SCORING
+                    </small>
+
+                    <h2 class="scroll-reveal scroll-reveal-delay-1">
+                        TURN SIGNALS<br>
+                        INTO <span>RISK.</span>
+                    </h2>
+
+                    <p class="scroll-reveal scroll-reveal-delay-2">
+                        Individual findings are combined into a risk score that
+                        helps classify the email as safe, suspicious or dangerous.
+                    </p>
                 </div>
 
             </div>
 
-            <div class="score-breakdown">
+            <div class="score-layout">
 
-                <div class="score-row">
-                    <div class="score-row-name">
-                        <span>PHISHING DETECTION</span>
-                        <strong>85</strong>
-                    </div>
-
-                    <div class="score-bar">
-                        <span style="width:85%"></span>
-                    </div>
+                <div class="score-circle scroll-reveal">
+                    <span class="score-number">0</span>
+                    <span class="score-label">RISK SCORE / 100</span>
                 </div>
 
-                <div class="score-row">
-                    <div class="score-row-name">
+                <div class="score-breakdown">
+
+                    <div class="score-row scroll-reveal">
+                        <span>PHISHING SIGNALS</span>
+                        <strong>50%</strong>
+
+                        <div>
+                            <i style="width: 50%;"></i>
+                        </div>
+                    </div>
+
+                    <div class="score-row scroll-reveal scroll-reveal-delay-1">
                         <span>HEADER ANALYSIS</span>
-                        <strong>55</strong>
+                        <strong>20%</strong>
+
+                        <div>
+                            <i style="width: 20%;"></i>
+                        </div>
                     </div>
 
-                    <div class="score-bar">
-                        <span style="width:55%"></span>
-                    </div>
-                </div>
+                    <div class="score-row scroll-reveal scroll-reveal-delay-2">
+                        <span>URL ANALYSIS</span>
+                        <strong>30%</strong>
 
-                <div class="score-row">
-                    <div class="score-row-name">
-                        <span>URL INTELLIGENCE</span>
-                        <strong>65</strong>
+                        <div>
+                            <i style="width: 30%;"></i>
+                        </div>
                     </div>
 
-                    <div class="score-bar">
-                        <span style="width:65%"></span>
-                    </div>
                 </div>
 
             </div>
 
-            <div class="slide-footer">
-                <span>50% PHISHING · 20% HEADERS · 30% URLS</span>
-                <span>SCROLL FOR THE VERDICT ↓</span>
-            </div>
         </section>
 
 
         <section class="slide slide-four">
 
-            <div class="verdict-number">04 / 05</div>
+            <div class="verdict-content">
 
-            <div class="verdict-background"></div>
+                <small class="scroll-reveal">
+                    03 / FINAL VERDICT
+                </small>
 
-            <div class="verdict-heading">
-                <div class="eyebrow">FINAL ASSESSMENT</div>
+                <h3 class="scroll-reveal scroll-reveal-delay-1">
+                    THE QUESTION IS SIMPLE:
+                </h3>
 
-                <p>EVERY SIGNAL HAS BEEN WEIGHED.</p>
+                <h2 class="scroll-reveal scroll-reveal-delay-2">
+                    SAFE<br>
+                    OR<br>
+                    DANGEROUS?
+                </h2>
 
-                <h1>THE VERDICT.</h1>
-            </div>
-
-            <div class="verdict-card">
-
-                <div class="verdict-card-top">
-                    <span>ANALYSIS COMPLETE</span>
-                    <span>● VERIFIED</span>
-                </div>
-
-                <div class="danger-title">
-                    DANGEROUS
-                </div>
-
-                <div class="danger-score">
-                    73<span>/100</span>
-                </div>
-
-                <div class="confidence-row">
-                    <span>CONFIDENCE</span>
-                    <strong>HIGH</strong>
-                </div>
-
-                <div class="reason-list">
+                <div class="verdict-card scroll-reveal scroll-reveal-delay-3">
 
                     <div>
-                        <b>01</b>
-                        Suspicious sender identity
+                        <span>ANALYSIS RESULT</span>
+                        <span>THREAT DETECTED</span>
                     </div>
 
-                    <div>
-                        <b>02</b>
-                        Credential request detected
+                    <strong>
+                        DANGEROUS
+                    </strong>
+
+                    <div class="verdict-score">
+                        73<span>/100</span>
                     </div>
 
-                    <div>
-                        <b>03</b>
-                        Unsafe link detected
+                    <span>
+                        EXAMPLE RISK SCORE
+                    </span>
+
+                    <div class="verdict-points">
+
+                        <div>
+                            <span>PHISHING</span>
+                            Suspicious language and social engineering signals
+                        </div>
+
+                        <div>
+                            <span>HEADERS</span>
+                            Sender identity and routing inconsistencies
+                        </div>
+
+                        <div>
+                            <span>URLS</span>
+                            Suspicious links and domain characteristics
+                        </div>
+
                     </div>
 
                 </div>
+
             </div>
 
-            <div class="verdict-scale">
-                <span>SAFE</span>
-                <div></div>
-                <strong>DANGEROUS</strong>
-            </div>
-
-            <div class="slide-footer">
-                <span>THREAT CLASSIFICATION</span>
-                <span>SCROLL TO ANALYZE YOURS ↓</span>
-            </div>
         </section>
 
 
         <section class="slide slide-five">
 
-            <div class="slide-number">05 / 05</div>
+            <div class="final-cta">
 
-            <div class="analyze-background"></div>
+                <small class="scroll-reveal">
+                    04 / ANALYZE
+                </small>
 
-            <div class="analyze-copy">
+                <h2 class="scroll-reveal scroll-reveal-delay-1">
+                    TRUST<br>
+                    NOTHING.<br>
+                    <span>CHECK EVERYTHING.</span>
+                </h2>
 
-                <div class="eyebrow">YOUR TURN</div>
-
-                <h1>
-                    ANALYZE<br>
-                    YOURS.
-                </h1>
-
-                <p>
-                    Paste an email or upload an <strong>.eml</strong> file.
-                    Your message will be analyzed locally.
+                <p class="scroll-reveal scroll-reveal-delay-2">
+                    Upload an <strong>.eml</strong> file or paste an email
+                    above and let the analyzer inspect it before you interact
+                    with suspicious content.
                 </p>
 
-                <div class="analysis-features">
+                <div class="cta-summary scroll-reveal scroll-reveal-delay-3">
                     <span>HEADERS</span>
-                    <span>CONTENT</span>
+                    <span>PHISHING</span>
                     <span>URLS</span>
                     <span>ATTACHMENTS</span>
+                    <span>RISK SCORE</span>
                 </div>
 
-            </div>
-
-            <form
-                class="analysis-form"
-                action="/analyze"
-                method="POST"
-                enctype="multipart/form-data"
-            >
-
-                <div class="form-top">
-                    <span>EMAIL INPUT</span>
-                    <span>LOCAL PROCESSING</span>
+                <div class="cta-label">
+                    <span>INPUT</span>
+                    <span>EMAIL FILE OR TEXT</span>
                 </div>
 
-                <textarea
-                    name="email"
-                    placeholder="Paste the complete email here..."
-                ></textarea>
+                <div class="cta-actions">
 
-                <div class="form-bottom">
-
-                    <label class="upload-button">
-                        <input
-                            type="file"
-                            name="email_file"
-                            accept=".eml"
-                        >
-
-                        <span class="upload-symbol">↑</span>
-
-                        <span>
-                            <strong>UPLOAD .EML</strong>
-                            <small>MAX 5 MB</small>
-                        </span>
+                    <label for="emailFileBottom" class="upload-button">
+                        <span>+</span>
+                        UPLOAD .EML
                     </label>
 
-                    <button
-                        type="submit"
-                        class="analyze-button"
-                    >
-                        <span>ANALYZE EMAIL</span>
-                        <b>→</b>
+                    <input type="file" id="emailFileBottom" accept=".eml">
+
+                    <button type="button" class="analyze-button" id="bottomAnalyze">
+                        <span>START ANALYSIS</span>
+                        <span class="button-arrow">→</span>
                     </button>
 
                 </div>
 
-            </form>
+                <div class="local-note">
+                    LOCAL ANALYSIS • NO EMAIL SENT OUT
+                </div>
 
-            <div class="privacy-note">
-                LOCAL · PRIVATE · FAST
-            </div>
-
-            <div class="slide-footer">
-                <span>EMAIL SECURITY ANALYZER</span>
-                <span>ANALYSIS COMPLETE</span>
             </div>
 
         </section>
 
     </main>
 
+
+    <script>
+
+        const emailInput = document.getElementById("emailInput");
+        const emailPreview = document.getElementById("emailPreview");
+        const previewFrom = document.getElementById("previewFrom");
+        const previewSubject = document.getElementById("previewSubject");
+        const previewTo = document.getElementById("previewTo");
+        const previewBody = document.getElementById("previewBody");
+        const previewType = document.getElementById("previewType");
+        const inputStatus = document.getElementById("inputStatus");
+
+        const emailFile = document.getElementById("emailFile");
+        const emailFileBottom = document.getElementById("emailFileBottom");
+        const fileName = document.getElementById("fileName");
+
+        const analysisForm = document.getElementById("analysisForm");
+        const analyzeButton = document.getElementById("analyzeButton");
+        const bottomAnalyze = document.getElementById("bottomAnalyze");
+
+
+        function extractHeader(text, headerName) {
+
+            const regex = new RegExp(
+                "^" + headerName + "\\s*:\\s*(.*)$",
+                "im"
+            );
+
+            const match = text.match(regex);
+
+            return match ? match[1].trim() : "";
+        }
+
+
+        function extractBody(text) {
+
+            const parts = text.split(/\r?\n\r?\n/);
+
+            if (parts.length > 1) {
+                return parts.slice(1).join("\n\n").trim();
+            }
+
+            return text.trim();
+        }
+
+
+        function updateTextPreview(text) {
+
+            const cleanText = text.trim();
+
+            if (!cleanText) {
+
+                emailPreview.classList.add("empty");
+
+                previewFrom.textContent = "—";
+                previewSubject.textContent = "—";
+                previewTo.textContent = "—";
+                previewBody.textContent = "Paste an email to preview it here.";
+                previewType.textContent = "NO INPUT";
+                inputStatus.textContent = "WAITING FOR INPUT";
+
+                return;
+            }
+
+            const from = extractHeader(cleanText, "From");
+            const subject = extractHeader(cleanText, "Subject");
+            const to = extractHeader(cleanText, "To");
+            const body = extractBody(cleanText);
+
+            previewFrom.textContent = from || "Not detected";
+            previewSubject.textContent = subject || "Not detected";
+            previewTo.textContent = to || "Not detected";
+
+            if (body) {
+                previewBody.textContent = body.substring(0, 1500);
+            } else {
+                previewBody.textContent = "Message body not detected.";
+            }
+
+            previewType.textContent = "PASTED EMAIL";
+            inputStatus.textContent = "EMAIL DETECTED";
+
+            emailPreview.classList.remove("empty");
+        }
+
+
+        function readEmailFile(file) {
+
+            if (!file) {
+                return;
+            }
+
+            if (!file.name.toLowerCase().endsWith(".eml")) {
+
+                fileName.textContent = "Only .eml files are supported.";
+
+                return;
+            }
+
+            fileName.textContent = file.name;
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+
+                const text = event.target.result;
+
+                emailInput.value = text;
+
+                updateTextPreview(text);
+
+                previewType.textContent = "UPLOADED .EML";
+                inputStatus.textContent = "FILE LOADED";
+            };
+
+            reader.onerror = function () {
+
+                fileName.textContent = "Unable to read file.";
+
+            };
+
+            reader.readAsText(file);
+        }
+
+
+        emailInput.addEventListener(
+            "input",
+            function () {
+
+                if (emailFile) {
+                    emailFile.value = "";
+                }
+
+                if (emailFileBottom) {
+                    emailFileBottom.value = "";
+                }
+
+                fileName.textContent = "No file selected";
+
+                updateTextPreview(emailInput.value);
+
+            }
+        );
+
+
+        emailFile.addEventListener(
+            "change",
+            function () {
+
+                const file = this.files[0];
+
+                readEmailFile(file);
+
+            }
+        );
+
+
+        emailFileBottom.addEventListener(
+            "change",
+            function () {
+
+                const file = this.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+                if (!file.name.toLowerCase().endsWith(".eml")) {
+
+                    fileName.textContent = "Only .eml files are supported.";
+
+                    return;
+                }
+
+                emailFile.files = this.files;
+
+                readEmailFile(file);
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+
+        analysisForm.addEventListener(
+            "submit",
+            function (event) {
+
+                const hasText = emailInput.value.trim().length > 0;
+
+                const hasFile =
+                    emailFile.files &&
+                    emailFile.files.length > 0;
+
+                if (!hasText && !hasFile) {
+
+                    event.preventDefault();
+
+                    emailInput.focus();
+
+                    inputStatus.textContent = "INPUT REQUIRED";
+
+                    emailPreview.classList.remove("empty");
+
+                    previewType.textContent = "NO INPUT";
+                    previewBody.textContent =
+                        "Paste an email or upload an .eml file before analysis.";
+
+                    return;
+                }
+
+                analyzeButton.querySelector("span").textContent =
+                    "ANALYZING EMAIL...";
+
+            }
+        );
+
+
+        bottomAnalyze.addEventListener(
+            "click",
+            function () {
+
+                const hasText = emailInput.value.trim().length > 0;
+
+                const hasFile =
+                    emailFile.files &&
+                    emailFile.files.length > 0;
+
+                if (!hasText && !hasFile) {
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+                    setTimeout(
+                        function () {
+                            emailInput.focus();
+                        },
+                        500
+                    );
+
+                    return;
+                }
+
+                analysisForm.requestSubmit();
+
+            }
+        );
+
+
+        const revealElements = document.querySelectorAll(
+            ".hero-copy h1, " +
+            ".hero-copy p, " +
+            ".section-intro small, " +
+            ".section-intro h2, " +
+            ".section-intro p, " +
+            ".detection-card, " +
+            ".score-circle, " +
+            ".score-breakdown, " +
+            ".verdict-content > small, " +
+            ".verdict-content h3, " +
+            ".verdict-content h2, " +
+            ".verdict-card, " +
+            ".final-cta > small, " +
+            ".final-cta h2, " +
+            ".final-cta p, " +
+            ".cta-summary"
+        );
+
+
+        revealElements.forEach(
+            function (element) {
+
+                element.classList.add("scroll-reveal");
+
+            }
+        );
+
+
+        const revealObserver = new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(
+                    function (entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("visible");
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.18
+            }
+        );
+
+
+        revealElements.forEach(
+            function (element) {
+
+                revealObserver.observe(element);
+
+            }
+        );
+
+        const scrollLetters = [];
+
+        document.querySelectorAll(".detection-card *").forEach(element => {
+            const text = element.textContent.trim();
+            const size = parseFloat(window.getComputedStyle(element).fontSize);
+
+            if (
+                text.length === 1 &&
+                ["P", "H", "U", "A"].includes(text) &&
+                size >= 50
+            ) {
+                element.classList.add("scroll-letter");
+                scrollLetters.push(element);
+            }
+        });
+
+        const letterObserver = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            },
+            {
+                threshold: 0.35
+            }
+        );
+
+        scrollLetters.forEach(letter => {
+            letterObserver.observe(letter);
+        });
+
+    </script>
+
 </body>
+
 </html>
