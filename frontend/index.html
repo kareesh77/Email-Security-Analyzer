@@ -718,38 +718,89 @@
             }
         );
 
-        const scrollLetters = [];
-
-        document.querySelectorAll(".detection-card *").forEach(element => {
-            const text = element.textContent.trim();
-            const size = parseFloat(window.getComputedStyle(element).fontSize);
-
-            if (
-                text.length === 1 &&
-                ["P", "H", "U", "A"].includes(text) &&
-                size >= 50
-            ) {
-                element.classList.add("scroll-letter");
-                scrollLetters.push(element);
-            }
-        });
-
-        const letterObserver = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                    }
-                });
-            },
-            {
-                threshold: 0.35
-            }
+        const scrollLetters = Array.from(
+            document.querySelectorAll(".detection-letter")
         );
 
-        scrollLetters.forEach(letter => {
-            letterObserver.observe(letter);
-        });
+        function updateScrollLetters() {
+
+            const viewportHeight = window.innerHeight;
+            const triggerPoint = viewportHeight * 0.65;
+
+            scrollLetters.forEach(function (letter) {
+
+                const rect = letter.getBoundingClientRect();
+
+                const center =
+                    rect.top + (rect.height / 2);
+
+                const distance =
+                    center - triggerPoint;
+
+                const range =
+                    viewportHeight * 0.55;
+
+                const progress = Math.max(
+                    -1,
+                    Math.min(
+                        1,
+                        distance / range
+                    )
+                );
+
+                const movement =
+                    progress * 100;
+
+                const scale =
+                    1.08 -
+                    Math.abs(progress) * 0.08;
+
+                const opacity =
+                    1 -
+                    Math.abs(progress) * 0.35;
+
+                letter.style.transform =
+                    "translate3d(0, " +
+                    movement +
+                    "px, 0) scale(" +
+                    scale +
+                    ")";
+
+                letter.style.opacity =
+                    opacity;
+            });
+        }
+
+        let scrollTicking = false;
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                if (!scrollTicking) {
+
+                    window.requestAnimationFrame(
+                        function () {
+
+                            updateScrollLetters();
+
+                            scrollTicking = false;
+                        }
+                    );
+
+                    scrollTicking = true;
+                }
+
+            },
+            { passive: true }
+        );
+
+        window.addEventListener(
+            "resize",
+            updateScrollLetters
+        );
+
+        updateScrollLetters();
 
     </script>
 
