@@ -1056,3 +1056,181 @@ main {
         scroll-behavior: auto;
     }
 }
+.email-demo {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+.email-window {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 101 !important;
+}
+
+.email-window form {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.window-top {
+    display: flex !important;
+}
+
+#emailInput {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.input-label {
+    display: flex !important;
+}
+
+.email-preview {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.upload-row {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.analyze-button {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.slide-one {
+    overflow: visible !important;
+}
+.slide-one {
+    position: relative !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 110px 5vw 80px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+
+.hero-copy {
+    width: 100% !important;
+    max-width: 1100px !important;
+    text-align: center !important;
+    margin: 0 auto 45px !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+.hero-copy h1 {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.hero-copy p {
+    max-width: 800px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.check-here {
+    position: absolute !important;
+    top: 115px !important;
+    left: 8vw !important;
+    z-index: 10 !important;
+}
+
+.email-demo {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: min(1100px, 90vw) !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    z-index: 20 !important;
+}
+
+.email-window {
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+}
+
+.email-window form {
+    width: 100% !important;
+}
+
+#emailInput {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.email-preview {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.scroll-hint {
+    margin-top: 35px !important;
+}
+
+@media (max-width: 900px) {
+
+    .slide-one {
+        padding: 90px 5vw 60px !important;
+    }
+
+    .hero-copy {
+        margin-bottom: 35px !important;
+    }
+
+    .check-here {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        margin-bottom: 25px !important;
+    }
+
+    .email-demo {
+        width: 100% !important;
+        max-width: 820px !important;
+    }
+
+}
+.check-here {
+    display: none !important;
+}
+
+.scroll-hint {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    margin: 35px auto 0 !important;
+    width: 100% !important;
+    max-width: 1100px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 30 !important;
+}
+
+.slide-one {
+    justify-content: flex-start !important;
+}
